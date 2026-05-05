@@ -52,7 +52,7 @@ sudo systemctl restart xrdp
  
 ## Step 4 — Deploy Guacamole
  
-Create a `docker-compose.yml`:
+Create or copy the docker `compose.yaml` file:
  
 ```yaml
 version: "3"
