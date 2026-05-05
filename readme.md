@@ -84,7 +84,7 @@ docker compose up -d
  
 ## Step  — Add the Pi as a Connection
  
-1. Open `http://<pi-ip>:8080/guacamole` and log in with `guacadmin` / `guacadmin`
+1. Open `http://<pi-ip>:8080` and log in with `guacadmin` / `guacadmin`
 2. Go to **Settings → Connections → New Connection** and fill in:
  
 | Field | Value |
