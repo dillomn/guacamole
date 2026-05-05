@@ -5,10 +5,22 @@
 - Raspberry Pi 4 or 5 running Raspberry Pi OS
 - Docker and Docker Compose installed
 - Pi booted into **X11 mode** (not Wayland)
- 
+
 ---
  
-## Step 1 — Switch Pi to X11
+## Step 1 — Install Docker
+ 
+```bash
+curl -sSL https://get.docker.com | sh
+```
+
+```bash
+sudo usermod -aG docker $USER
+```
+
+---
+ 
+## Step 2 — Switch Pi to X11
  
 ```bash
 sudo raspi-config
@@ -18,22 +30,27 @@ Navigate to: **Advanced Options → Wayland → X11** then reboot.
  
 ---
  
-## Step 2 — Install xrdp
+## Step 3 — Install xrdp
  
 ```bash
 sudo apt update && sudo apt install xrdp -y
 sudo systemctl enable xrdp && sudo systemctl start xrdp
 ```
  
-Set `security_layer=rdp` in `/etc/xrdp/xrdp.ini` then restart:
- 
+Edit the config for xrdp:
+```bash
+sudo nano /etc/xrdp/xrdp.ini
+```
+Change the line ``security_layer=negotiate`` to ``security_layer=rdp``
+
+Then restart xrdp
 ```bash
 sudo systemctl restart xrdp
 ```
  
 ---
  
-## Step 3 — Deploy Guacamole
+## Step 4 — Deploy Guacamole
  
 Create a `docker-compose.yml`:
  
@@ -65,7 +82,7 @@ docker compose up -d
  
 ---
  
-## Step 4 — Add the Pi as a Connection
+## Step  — Add the Pi as a Connection
  
 1. Open `http://<pi-ip>:8080/guacamole` and log in with `guacadmin` / `guacadmin`
 2. Go to **Settings → Connections → New Connection** and fill in:
